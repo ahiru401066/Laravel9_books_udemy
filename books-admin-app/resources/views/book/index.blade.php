@@ -1,0 +1,2 @@
+book.blade.php
+{{ $books }}
