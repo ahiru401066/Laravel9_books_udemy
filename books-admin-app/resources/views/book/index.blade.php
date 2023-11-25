@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          {{ __('Dashboard') }}
+          {{ __('本の管理') }}
       </h2>
   </x-slot>
 
@@ -40,6 +40,9 @@
                             <td class="px-4 py-3 text-lg text-gray-900">{{ $book->publication }}</td>
                             <td class="px-4 py-3 text-lg text-gray-900">{{ carbon\Carbon::parse($book->read_at)->format('Y年n月j日') }}</td>
                             <td class="px-4 py-3 text-lg text-gray-900">{{ Str::limit($book->note, 40, $end='...') }}</td>
+                            <td class="px-4 py-3">
+                              <button onclick="location.href='/book/detail/{{ $book->id }}'" class="text-xs shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">詳細</button>
+                            </td>
                           </tr>
                         @endforeach
                         </tbody>
