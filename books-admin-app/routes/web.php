@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->prefix('book')->group(function () {
     Route::get('/',[BookController::class, 'index'])->name('book');
+    Route::get('/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
+    Route::get('/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+    
+    Route::patch('/update', [BookController::class, 'update'])->name('book.update');
 });
 
 require __DIR__.'/auth.php';
