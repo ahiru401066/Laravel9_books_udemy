@@ -9,6 +9,8 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'status'];
+
     
     public const BOOK_STATUS_READING = 1;
     public const BOOK_STATUS_UNREAD= 2;
