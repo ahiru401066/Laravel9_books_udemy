@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,12 +10,37 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         // $books = Book::all();
+        // $books = Book::paginate(8);
+
+        // return view('book.index', ['books' => $books]);
+
+        $input = $request->all();
+        // $books = Book::search($input)->orderBy('id', 'desc')->paginate(8);
         $books = Book::paginate(8);
 
-        return view('book.index', ['books' => $books]);
+        $publications = Book::select('publication')->groupBy('publication')->pluck('publication');
+        $authors = Book::select('author')->groupBy('author')->pluck('author');
+        // $statuses = Book::select('status')->groupBy('status')->pluck('status');
+
+        return view(
+            'book.index',
+            ['books' => $books,
+                // selectboxの値
+                'publications' => $publications,
+                'authors' => $authors,
+                // 'status' => $statuses,
+
+                // 検索する値
+                'name' => $input['name'] ?? '',
+                'publication' => $input['publication'] ?? '',
+                'author' => $input['author'] ?? '',
+                'status' => $input['status'] ?? '',
+                'note' => $input['note'] ?? '',
+            ]
+        );
     }
 
     public function detail($id)
@@ -31,7 +57,7 @@ class BookController extends Controller
         return view('book.edit', ['book' => $book,]);
     }
 
-    public function update(Request $request)
+    public function update(BookRequest $request)
     {
         try {
             DB::beginTransaction();

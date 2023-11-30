@@ -141,4 +141,14 @@ return [
     'uppercase'            => ':Attributeは、大文字で入力してください。',
     'url'                  => ':Attributeは、有効なURL形式で指定してください。',
     'uuid'                 => ':Attributeは、有効なUUIDである必要があります。',
+
+    'attributes' => [
+        'password' => 'パスワード',
+        'status' => 'ステータス',
+        'name' => '名前',
+        'author' => '著者',
+        'publication' => '出版',
+        'read_at' => '読み終わった日',
+        'note' => 'メモ',
+    ],
 ];
