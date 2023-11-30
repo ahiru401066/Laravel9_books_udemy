@@ -32,7 +32,10 @@
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="sm:col-span-3">
                             <div class="mt-2">
-                              <input type="text" name="name" id="name" value="{{ $book->name }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              <input type="text" name="name" id="name" value="{{ old('name', $book->name) }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              @error('name')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </dd>
@@ -42,13 +45,13 @@
                         <dt class="text-sm font-medium leading-6 text-gray-900">ステータス</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <select id="status" name="status" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                            {{-- <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option> --}}
                             @foreach (App\Models\Book::BOOK_STATUS_OBJECT as $key => $value)
-                              <option value="{{ $key }}" @if($key === $book->status) selected @endif>{{ $value }}</option>
+                            <option value="{{ $key }}" @if($key === (int)old('status', $book->status)) selected @endif>{{ $value }}</option>
                             @endforeach
                           </select>
+                          @error('sutatus')
+                            <div class="text-red-600">{{ $message }}</div>
+                          @enderror
                         </dd>
                       </div>
                       {{-- author --}}
@@ -57,7 +60,10 @@
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="sm:col-span-3">
                             <div class="mt-2">
-                              <input type="text" name="author" id="author" value="{{ $book->author }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              <input type="text" name="author" id="author" value="{{ old('author',$book->author) }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              @error('author')
+                                <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>   
                         </dd>
@@ -68,7 +74,10 @@
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="sm:col-span-3">
                             <div class="mt-2">
-                              <input type="text" name="publication" id="publication" value="{{ $book->publication }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              <input type="text" name="publication" id="publication" value="{{ old('publication', $book->publication) }}" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              @error('publication')
+                                <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </dd>
@@ -79,7 +88,10 @@
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="sm:col-span-3">
                             <div class="mt-2">
-                              <input type="text" name="read_at" id="read_at" value="{{ $book->read_at }}" placeholder=例）2022-05-01" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              <input type="text" name="read_at" id="read_at" value="{{ old('read_at', $book->read_at) }}" placeholder=例）2022-05-01" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                              @error('read_at')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </dd>
@@ -89,7 +101,10 @@
                         <dt class="text-sm font-medium leading-6 text-gray-900">メモ</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="mt-2">
-                            <textarea id="note" name="note" rows="5" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $book->note }}</textarea>
+                            <textarea id="note" name="note" rows="5" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ old('note', $book->note) }}</textarea>
+                            @error('note')
+                              <div class="text-red-600">{{ $message }}</div>
+                            @enderror
                           </div>
                         </dd>
                       </div>
