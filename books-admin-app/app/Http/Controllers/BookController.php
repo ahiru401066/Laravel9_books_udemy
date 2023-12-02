@@ -17,9 +17,10 @@ class BookController extends Controller
 
         // return view('book.index', ['books' => $books]);
 
-        $input = $request->all();
-        // $books = Book::search($input)->orderBy('id', 'desc')->paginate(8);
-        $books = Book::paginate(8);
+        // $input = $request->all();
+        $input = $request->only('name', 'status', 'author', 'publication', 'note');
+        $books = Book::search($input)->orderBy('id', 'desc')->paginate(8);
+        // $books = Book::paginate(8);
 
         $publications = Book::select('publication')->groupBy('publication')->pluck('publication');
         $authors = Book::select('author')->groupBy('author')->pluck('author');
