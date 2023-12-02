@@ -87,23 +87,27 @@
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">ステータス</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">著者</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">出版</th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">読み終わった日</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">読破日</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メモ</th>
+                            <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                             <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                           </tr>
                         </thead>
                         <tbody>
                         @foreach($books as $book)
                           <tr>
-                            <td class="px-4 py-3">{{ $book->id}}</td>
-                            <td class="px-4 py-3">{{ $book->name }}</td>
-                            <td class="px-4 py-3">{{ $book->status}}</td>
-                            <td class="px-4 py-3 text-lg text-gray-900">{{ $book->author}}</td>
-                            <td class="px-4 py-3 text-lg text-gray-900">{{ $book->publication }}</td>
-                            <td class="px-4 py-3 text-lg text-gray-900">{{ carbon\Carbon::parse($book->read_at)->format('Y年n月j日') }}</td>
-                            <td class="px-4 py-3 text-lg text-gray-900">{{ Str::limit($book->note, 40, $end='...') }}</td>
-                            <td class="px-4 py-3">
-                              <button onclick="location.href='/book/detail/{{ $book->id }}'" class="text-xs shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">詳細</button>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ $book->id}}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ $book->name }}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ App\Models\Book::BOOK_STATUS_OBJECT[$book->status] }}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ $book->author}}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ $book->publication }}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ carbon\Carbon::parse($book->read_at)->format('Y年n月j日') }}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">{{ Str::limit($book->note, 40, $end='...') }}</td>
+                            <td class="text-sm border-t-2 border-gray-200 px-4 py-3">
+                              <button onclick="location.href='/book/detail/{{ $book->id }}'" class="text-sm shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">詳細</button>
+                            </td>
+                            <td class="text-base border-t-2 border-gray-200 px-4 py-3">
+                              <button onclick="location.href='/book/edit/{{ $book->id }}'" class="text-sm shadow bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">変更</button> 
                             </td>
                           </tr>
                         @endforeach

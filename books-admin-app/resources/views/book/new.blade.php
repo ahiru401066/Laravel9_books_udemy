@@ -72,9 +72,9 @@
                           </div>
                         </dd>
                       </div>
-                      {{-- 読み終わった日 --}}
+                      {{-- 読破日 --}}
                       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="text-sm font-medium leading-6 text-gray-900">読み終わった日</dt>
+                        <dt class="text-sm font-medium leading-6 text-gray-900">読破日</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                           <div class="sm:col-span-3">
                             <div class="mt-2">
