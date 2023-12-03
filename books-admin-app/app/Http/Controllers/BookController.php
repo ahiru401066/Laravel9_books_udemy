@@ -46,14 +46,14 @@ class BookController extends Controller
 
     public function detail($id)
     {
-        $book = book::find($id);
+        $book = book::findOrFail($id);
 
         return view('book.detail', ['book' => $book,]);
     }
 
     public function edit($id)
     {
-        $book = book::find($id);
+        $book = book::findOrFail($id);
 
         return view('book.edit', ['book' => $book,]);
     }
@@ -87,7 +87,7 @@ class BookController extends Controller
         return view('book.new');
     }
 
-    public function create(Request $request)
+    public function create(BookRequest $request)
     {
         try {
             Book::create($request->all());
